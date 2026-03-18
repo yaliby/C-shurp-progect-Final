@@ -1,0 +1,65 @@
+
+docker run -d \
+  --name minio \
+  --restart unless-stopped \
+  -p 9000:9000 \
+  -p 9001:9001 \
+  -e MINIO_ROOT_USER=minioadmin \
+  -e MINIO_ROOT_PASSWORD=StrongPassword123 \
+  -v /minio-data:/data \
+  quay.io/minio/minio server /data --console-address ":9001"
+
+
+
+
+
+docker run -d \
+  --name minio \
+  --restart unless-stopped \
+  -p 9000:9000 \
+  -p 9001:9001 \
+  -e MINIO_ROOT_USER=minioadmin \
+  -e MINIO_ROOT_PASSWORD=StrongPassword123 \
+  -e MINIO_SERVER_URL=http://IP_של_ה_VM:9000 \
+  -e MINIO_BROWSER_REDIRECT_URL=http://IP_של_ה_VM:9001 \
+  -v /minio-data:/data \
+  quay.io/minio/minio server /data --console-address ":9001"
+
+
+
+
+
+
+
+docker run -d \
+  --name minio \
+  --restart unless-stopped \
+  --network host \
+  -e MINIO_ROOT_USER=minioadmin \
+  -e MINIO_ROOT_PASSWORD=StrongPassword123 \
+  -v /minio-data:/data \
+  quay.io/minio/minio server /data --console-address ":9001"
+
+
+
+
+
+
+
+
+
+docker run -d \
+  --name minio \
+  --restart unless-stopped \
+  -p 9000:9000 \
+  -e MINIO_ROOT_USER=minioadmin \
+  -e MINIO_ROOT_PASSWORD=StrongPassword123 \
+  -v /minio-data:/data \
+  quay.io/minio/minio server /data
+
+
+mc alias set myminio http://IP:9000 minioadmin StrongPassword123
+mc mb myminio/test
+mc cp file.txt myminio/test
+
+
